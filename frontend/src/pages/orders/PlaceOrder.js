@@ -9,12 +9,12 @@ import * as actionCreators from '../../actions'
 function PlaceOrder({ history, orderCreate, cart, createOrder, createOrderReset }) {
 
     const { order, error, success } = orderCreate
+    let newCart = { ...cart }
+    newCart.itemsPrice = cart.cartItems.reduce((acc, item) => acc + parseFloat(item.price) * item.qty, 0).toFixed(2)
+    newCart.shippingPrice = (newCart.itemsPrice > 100 ? 0 : 10).toFixed(2)
+    newCart.taxPrice = Number((0.082) * newCart.itemsPrice).toFixed(2)
 
-    cart.itemsPrice = cart.cartItems.reduce((acc, item) => acc + item.price * item.qty, 0).toFixed(2)
-    cart.shippingPrice = (cart.itemsPrice > 100 ? 0 : 10).toFixed(2)
-    cart.taxPrice = Number((0.082) * cart.itemsPrice).toFixed(2)
-
-    cart.totalPrice = (Number(cart.itemsPrice) + Number(cart.shippingPrice) + Number(cart.taxPrice)).toFixed(2)
+    newCart.totalPrice = (Number(newCart.itemsPrice) + Number(newCart.shippingPrice) + Number(newCart.taxPrice)).toFixed(2)
 
 
     if (!cart.paymentMethod) {
@@ -31,13 +31,13 @@ function PlaceOrder({ history, orderCreate, cart, createOrder, createOrderReset 
 
     const placeOrder = () => {
         const data = {
-            orderItems: cart.cartItems,
-            shippingAddress: cart.shippingAddress,
-            paymentMethod: cart.paymentMethod,
-            itemsPrice: cart.itemsPrice,
-            shippingPrice: cart.shippingPrice,
-            taxPrice: cart.taxPrice,
-            totalPrice: cart.totalPrice,
+            orderItems: newCart.cartItems,
+            shippingAddress: newCart.shippingAddress,
+            paymentMethod: newCart.paymentMethod,
+            itemsPrice: newCart.itemsPrice,
+            shippingPrice: newCart.shippingPrice,
+            taxPrice: newCart.taxPrice,
+            totalPrice: newCart.totalPrice,
         }
         createOrder(data)
     }
@@ -52,28 +52,28 @@ function PlaceOrder({ history, orderCreate, cart, createOrder, createOrderReset 
                             <h2 className='text-right' style={{ direction: 'rtl' }}>نحوه ارسال</h2>
 
                             <p >
-                                {cart.shippingAddress?.address},  {cart.shippingAddress?.city}
+                                {newCart.shippingAddress?.address},  {newCart.shippingAddress?.city}
                                 {'  '}
-                                {cart.shippingAddress?.postalCode},
+                                {newCart.shippingAddress?.postalCode},
                                 {'  '}
-                                {cart.shippingAddress?.country}
+                                {newCart.shippingAddress?.country}
                             </p>
                         </ListGroup.Item>
 
                         <ListGroup.Item>
                             <h2 className='text-right'>نحوه پرداخت</h2>
                             <p>
-                                {cart.paymentMethod}
+                                {newCart.paymentMethod}
                             </p>
                         </ListGroup.Item>
 
                         <ListGroup.Item>
                             <h2>سبد خرید</h2>
-                            {cart.cartItems.length === 0 ? <Message variant='info'>
+                            {newCart.cartItems.length === 0 ? <Message variant='info'>
                                 سبد خرید شما خالی است
                             </Message> : (
                                     <ListGroup variant='flush'>
-                                        {cart.cartItems.map((item, index) => (
+                                        {newCart.cartItems.map((item, index) => (
                                             <ListGroup.Item key={index}>
                                                 <Row>
                                                     <Col md={1}>
@@ -108,28 +108,28 @@ function PlaceOrder({ history, orderCreate, cart, createOrder, createOrderReset 
                             <ListGroup.Item>
                                 <Row>
                                     <Col>مبلغ سفارش:</Col>
-                                    <Col>${cart.itemsPrice}</Col>
+                                    <Col>${newCart.itemsPrice}</Col>
                                 </Row>
                             </ListGroup.Item>
 
                             <ListGroup.Item>
                                 <Row>
                                     <Col>مبلغ ارسال سفارش:</Col>
-                                    <Col>${cart.shippingPrice}</Col>
+                                    <Col>${newCart.shippingPrice}</Col>
                                 </Row>
                             </ListGroup.Item>
 
                             <ListGroup.Item>
                                 <Row>
                                     <Col>مالیات:</Col>
-                                    <Col>${cart.taxPrice}</Col>
+                                    <Col>${newCart.taxPrice}</Col>
                                 </Row>
                             </ListGroup.Item>
 
                             <ListGroup.Item>
                                 <Row>
                                     <Col>مبلغ کل:</Col>
-                                    <Col>${cart.totalPrice}</Col>
+                                    <Col>${newCart.totalPrice}</Col>
                                 </Row>
                             </ListGroup.Item>
 
@@ -142,7 +142,7 @@ function PlaceOrder({ history, orderCreate, cart, createOrder, createOrderReset 
                                 <Button
                                     type='button'
                                     className='btn-block'
-                                    disabled={cart.cartItems === 0}
+                                    disabled={newCart.cartItems === 0}
                                     onClick={placeOrder}
                                 >
                                     ثبت سفارش
