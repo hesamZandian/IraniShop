@@ -1,0 +1,123 @@
+@font-face {
+  font-family: "Yekan";
+  src: url('./assets/fonts/Yekan.woff') format('woff');
+} 
+
+* {
+  font-family: "Yekan", "Nunito Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+  letter-spacing: 0 !important;
+}
+
+.Font-Yekan {
+  font-family: "Yekan" !important;
+}
+
+.fw-bold {
+  font-weight: bold !important;
+}
+
+.nav-link, .dropdown-item {
+  font-size: 14px;
+}
+
+main{
+    min-height: 80vh;
+}
+
+h1{
+  font-size: 1.8rem;
+  padding:1rem 0;
+}
+
+h2{
+  font-size: 1.4rem;
+  padding:0.5rem 0;
+}
+
+h3{
+    padding:1rem 0;
+}
+
+.rating span{
+  margin:0.1rem;
+}
+
+/* carousel */
+.carousel-item-next,
+.carousel-item-prev,
+.carousel-item.active {
+  display: flex;
+}
+.carousel-caption {
+  position: absolute;
+  top: 0;
+}
+
+.carousel-caption h4 {
+  color: #fff;
+}
+
+.carousel img {
+  display:block;
+  height: 300px;
+  padding: 30px;
+  margin: 40px;
+  border-radius: 50%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.carousel a {
+  margin: 0 auto;
+}
+
+label[for='isadmin'], label[for='isavailable'] {
+  margin-right: 20px;
+}
+
+@media (max-width: 900px) {
+  .carousel-caption h2 {
+    font-size: 2.5vw;
+  }
+}
+
+.text-clamping {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical; 
+}
+
+#selected_brand {
+  margin-right: 10px;
+}
+
+.homescreen-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* d-flex align-items-center flex-wrap */
+.homescreen-dropdowns {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+@media (max-width:768px) {
+  .homescreen-head {
+    flex-direction: column;
+    justify-content: center;
+  }
+  .search-input {
+    margin-top: 10px !important;
+    margin-bottom: 10px !important;
+  }
+}
+
+@media (max-width:480px) {
+  .homescreen-dropdowns  {
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+/* d-flex justify-content-between align-items-center */
