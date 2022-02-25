@@ -5,9 +5,9 @@ import SearchBox from './SearchBox'
 import * as actionCreators from '../actions'
 import { connect } from 'react-redux'
 
-function Header({ userLogin }) {
+function Header({ userLogin, logout }) {
 
-    const { userInfo, logout } = userLogin
+    const { userInfo } = userLogin
 
 
     const logoutHandler = () => {
