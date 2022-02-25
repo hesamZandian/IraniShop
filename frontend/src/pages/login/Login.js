@@ -5,6 +5,7 @@ import Loader from '../../components/Loader'
 import Message from '../../components/Message'
 import FormContainer from '../../components/FormContainer'
 import * as actionCreators from '../../actions'
+import { connect } from 'react-redux'
 
 function Login({ location, history, login, userLogin }) {
     const [email, setEmail] = useState('')
@@ -86,4 +87,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default (mapStateToProps, mapDispatchToProps)(Login)
+export default connect(mapStateToProps, mapDispatchToProps)(Login)
